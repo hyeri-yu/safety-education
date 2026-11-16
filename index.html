@@ -12,13 +12,13 @@ h1{color:var(--purple);font-size:clamp(25px,4vw,36px);margin:18px 0 5px}.intro{c
 .daily-area{background:#F1F5FC;border:1px solid #E5EAF4;border-radius:18px;padding:18px 20px;margin:18px 0;color:#526C96}
 .daily-area strong{display:block;font-size:20px;margin-bottom:4px}
 .daily-area span{font-size:13px;color:#71809A}
-.nav-groups{margin:20px 0 22px}
-.nav-row{display:grid;gap:10px}
+.nav-groups{margin:24px 0 30px}
+.nav-row{display:grid;gap:12px}
 .nav-row.primary-row{grid-template-columns:repeat(2,minmax(0,1fr))}
 .nav-row.main-areas{grid-template-columns:repeat(4,minmax(0,1fr))}
-.nav-row.final-areas{grid-template-columns:repeat(3,minmax(0,1fr))}
-.nav-divider{border:0;border-top:2px solid #B7DFC0;margin:15px 0}
-.nav-label{font-size:12px;font-weight:800;color:#6A9A78;margin:0 0 8px 3px;letter-spacing:.02em}
+.nav-row.final-areas{grid-template-columns:repeat(4,minmax(0,1fr))}
+.nav-divider{border:0;border-top:1px solid #B7DFC0;margin:18px 0}
+.nav-label{font-size:12px;font-weight:800;color:#6A9A78;margin:0 0 10px 3px;letter-spacing:.02em}
 .tab{min-height:62px;border:1px solid #D7EBDD;border-radius:15px;padding:11px 12px;background:#fff;text-align:left;color:#087F5B;cursor:pointer;font:inherit;font-weight:800;display:flex;flex-direction:column;justify-content:center}
 .tab.active{background:#DDF3D9;border-color:#83C995;box-shadow:inset 0 0 0 1px #83C995}
 .tab small{display:block;color:#72927B;font-size:11px;font-weight:500;margin-top:2px}
@@ -122,7 +122,7 @@ function getDailyVideo(){
  const day=dayNumber();
  const area=areas[day%areas.length];
  const list=videos.filter(v=>v.area===area[0]);
- if(!list.length)return null;
+ if(!list.length)return {area,video:null,day};
  const video=list[Math.floor(day/areas.length)%list.length];
  return {area,video,day};
 }
@@ -137,9 +137,9 @@ function updateProgress(){
 }
 function setActiveTab(){
  document.querySelectorAll('.tab').forEach(btn=>{
-   const active=(btn.dataset.view===currentView && (currentView==='today'||currentView==='all')) ||
-     (currentView==='area' && btn.dataset.area===currentArea);
-   btn.classList.toggle('active',active);
+  const active=(btn.dataset.view===currentView && (currentView==='today'||currentView==='all')) ||
+   (currentView==='area' && btn.dataset.area===currentArea);
+  btn.classList.toggle('active',active);
  });
 }
 function makeVideoCard(v){
@@ -165,20 +165,20 @@ function render(){
  box.innerHTML=`<strong>🌞 오늘의 안전교육 · ${todayIcon} ${todayName}</strong><span>${dateText} · ${daily.day+1}일차<br>${todayDesc}<br>오늘은 영상 한 편만 함께 봐요. 내일은 다음 안전교육 영역의 영상으로 바뀝니다.</span>`;
  content.innerHTML='';
  if(currentView==='today'){
-   const h=document.createElement('h2');h.className='area-heading';h.textContent='오늘의 영상 1편';content.appendChild(h);
-   content.appendChild(makeVideoCard(daily.video));
-   const tip=document.createElement('p');tip.className='area-desc';tip.textContent='오늘은 이 영상 한 편만 시청해요. 내일은 다음 안전교육 영역의 영상 한 편이 자동으로 나옵니다.';content.appendChild(tip);
+  const h=document.createElement('h2');h.className='area-heading';h.textContent='오늘의 영상 1편';content.appendChild(h);
+  if(daily.video){content.appendChild(makeVideoCard(daily.video));}
+  else{const msg=document.createElement('p');msg.textContent='오늘의 영역에 등록된 영상이 없습니다.';content.appendChild(msg);}
+  const tip=document.createElement('p');tip.className='area-desc';tip.textContent='오늘은 이 영상 한 편만 시청해요. 내일은 다음 안전교육 영역의 영상 한 편이 자동으로 나옵니다.';content.appendChild(tip);
  }else{
-   let list=[];
-   let heading='';
-   if(currentView==='all'){list=videos;heading='전체 안전교육 영상';}
-   else{list=videos.filter(v=>v.area===currentArea);heading=currentArea;}
-   const h=document.createElement('h2');h.className='area-heading';h.textContent=heading;content.appendChild(h);
-   const desc=document.createElement('p');desc.className='area-desc';
-   desc.textContent=currentView==='all'?'전체 영역의 영상을 찾아볼 수 있어요. 오늘의 영상은 ‘오늘의 영역’에서 한 편씩 확인해 주세요.':`${currentArea} 영역의 영상 ${list.length}편입니다. 오늘의 기본 학습은 ‘오늘의 영역’에서 하루 한 편씩 진행됩니다.`;
-   content.appendChild(desc);
-   const grid=document.createElement('div');grid.className='cards';
-   list.forEach(v=>grid.appendChild(makeVideoCard(v)));content.appendChild(grid);
+  let list=[];let heading='';
+  if(currentView==='all'){list=videos;heading='전체 안전교육 영상';}
+  else{list=videos.filter(v=>v.area===currentArea);heading=currentArea;}
+  const h=document.createElement('h2');h.className='area-heading';h.textContent=heading;content.appendChild(h);
+  const desc=document.createElement('p');desc.className='area-desc';
+  desc.textContent=currentView==='all'?'전체 영역의 영상을 찾아볼 수 있어요. 오늘의 영상은 ‘오늘의 영역’에서 한 편씩 확인해 주세요.':`${currentArea} 영역의 영상 ${list.length}편입니다. 오늘의 기본 학습은 ‘오늘의 영역’에서 하루 한 편씩 진행됩니다.`;
+  content.appendChild(desc);
+  const grid=document.createElement('div');grid.className='cards';
+  list.forEach(v=>grid.appendChild(makeVideoCard(v)));content.appendChild(grid);
  }
  setActiveTab();updateProgress();
 }
@@ -189,30 +189,5 @@ document.querySelectorAll('.tab').forEach(btn=>{
   render();
  });
 });
-render();
- };
- const body=document.createElement('div');
- body.style.flex='1';
- const title=document.createElement('p');
- title.className='vtitle';
- title.textContent=v.title;
- const meta=document.createElement('div');
- meta.className='meta';
- meta.textContent=`${name} · 유치원 대상`;
- const a=document.createElement('a');
- a.className='watch';
- a.href=v.url;
- a.target='_blank';
- a.rel='noopener';
- a.textContent='▶ 오늘의 영상 보기';
- body.append(title,meta,a);
- card.append(check,body);
- content.appendChild(card);
- const tip=document.createElement('p');
- tip.className='area-desc';
- tip.textContent='영상을 시청한 뒤 왼쪽 체크 칸을 눌러 오늘의 학습을 기록해 주세요. 영상은 하루에 한 편씩 제공됩니다.';
- content.appendChild(tip);
- updateProgress();
-}
 render();
 </script></body></html>
