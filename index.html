@@ -12,8 +12,19 @@ h1{color:var(--purple);font-size:clamp(25px,4vw,36px);margin:18px 0 5px}.intro{c
 .daily-area{background:#F1F5FC;border:1px solid #E5EAF4;border-radius:18px;padding:18px 20px;margin:18px 0;color:#526C96}
 .daily-area strong{display:block;font-size:20px;margin-bottom:4px}
 .daily-area span{font-size:13px;color:#71809A}
+.nav-groups{margin:20px 0 22px}
+.nav-row{display:grid;gap:10px}
+.nav-row.primary-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+.nav-row.main-areas{grid-template-columns:repeat(4,minmax(0,1fr))}
+.nav-row.final-areas{grid-template-columns:repeat(3,minmax(0,1fr))}
+.nav-divider{border:0;border-top:2px solid #B7DFC0;margin:15px 0}
+.nav-label{font-size:12px;font-weight:800;color:#6A9A78;margin:0 0 8px 3px;letter-spacing:.02em}
+.tab{min-height:62px;border:1px solid #D7EBDD;border-radius:15px;padding:11px 12px;background:#fff;text-align:left;color:#087F5B;cursor:pointer;font:inherit;font-weight:800;display:flex;flex-direction:column;justify-content:center}
+.tab.active{background:#DDF3D9;border-color:#83C995;box-shadow:inset 0 0 0 1px #83C995}
+.tab small{display:block;color:#72927B;font-size:11px;font-weight:500;margin-top:2px}
+@media(max-width:700px){.nav-row.main-areas{grid-template-columns:repeat(2,minmax(0,1fr))}.nav-row.final-areas{grid-template-columns:repeat(2,minmax(0,1fr))}.nav-row.primary-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}
-.tabs .tab:nth-child(1),.tabs .tab:nth-child(2){grid-column:span 2}
 .tab{border:1px solid #eee7f0;border-radius:16px;padding:13px 10px;background:#fff;text-align:left;color:var(--purple);cursor:pointer;font:inherit;font-weight:800}
 .tab.active{background:var(--lav);border-color:#d9c9e2}.tab small{display:block;color:#95889b;font-size:11px;font-weight:500}
 .area-heading{font-size:23px;color:var(--purple);margin:25px 0 4px}.area-desc{color:#93869a;margin:0 0 14px}
@@ -24,11 +35,7 @@ h1{color:var(--purple);font-size:clamp(25px,4vw,36px);margin:18px 0 5px}.intro{c
 .watch{display:inline-block;background:#70577f;color:#fff;padding:7px 12px;border-radius:20px;text-decoration:none;font-size:13px;font-weight:800}
 .watch:hover{background:#594466}.empty{padding:30px;text-align:center;color:#998da0}
 .note{font-size:12px;color:#9a8da0;margin:25px 0 35px}
-@media(max-width:700px){
-  .tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .tabs .tab:nth-child(1),.tabs .tab:nth-child(2){grid-column:span 1}
-  .cards{grid-template-columns:1fr}.video{padding:13px}
-}
+@media(max-width:700px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:1fr}.video{padding:13px}}
 
 /* 에메랄드·연두 안전교육 테마 */
 :root{
@@ -66,48 +73,146 @@ input[type=search]:focus{outline:2px solid #A8D96C;border-color:#42B883}
 <header><a class="back" href="https://hyeri-yu.github.io/hahaha-ras/">← 꿈나라 교실로</a>
 <h1>🧭 나침반 안전교육 자료실</h1><p class="intro">유치원(급별 표시 ‘유’) 대상 영상만 모아 7대 안전교육 영역별로 정리했어요. 영상을 보고 체크하며 우리 반 안전교육을 기록해 보세요.</p>
 </header>
-<div class="toolbar"><input id="search" type="search" placeholder="영상 제목이나 안전 주제로 검색해 보세요"><div class="progress" id="progress">시청 완료 0 / 207</div></div>
-<section class="daily-area" id="dailyArea" aria-live="polite"></section><div class="tabs" id="tabs"></div><div id="content"></div>
+<div class="toolbar"><div class="progress" id="progress">시청 완료 0 / 207</div></div>
+<section class="daily-area" id="dailyArea" aria-live="polite"></section>
+<nav class="nav-groups" aria-label="안전교육 영역 선택">
+ <p class="nav-label">오늘의 학습</p>
+ <div class="nav-row primary-row">
+  <button class="tab active" data-view="today">🌞 오늘의 영역<small>오늘의 영상 1편</small></button>
+  <button class="tab" data-view="all">📚 전체 영역<small>전체 영상 모아보기</small></button>
+ </div>
+ <hr class="nav-divider">
+ <p class="nav-label">7대 안전교육 영역</p>
+ <div class="nav-row main-areas">
+  <button class="tab" data-area="생활안전">🏠 생활안전<small>22개 영상</small></button>
+  <button class="tab" data-area="교통안전">🚦 교통안전<small>71개 영상</small></button>
+  <button class="tab" data-area="폭력예방 및 신변안전">💗 폭력예방 및 신변안전<small>18개 영상</small></button>
+  <button class="tab" data-area="약물‧사이버 중독예방">🚫 약물·사이버 중독예방<small>14개 영상</small></button>
+ </div>
+ <div class="nav-row final-areas">
+  <button class="tab" data-area="재난안전">🔥 재난안전<small>50개 영상</small></button>
+  <button class="tab" data-area="직업안전">🦺 직업안전<small>8개 영상</small></button>
+  <button class="tab" data-area="응급처치">🩹 응급처치<small>24개 영상</small></button>
+ </div>
+</nav>
+<div id="content"></div>
 <p class="note">※ 영상 링크는 자료 안내문에 수록된 주소를 연결했습니다. 영상 제공처의 공개 설정이나 링크 변경에 따라 재생되지 않을 수 있습니다. 체크 기록은 현재 사용 중인 브라우저에 저장됩니다.</p>
 </div>
 <script>
 const videos=[{"area":"생활안전","title":"안전하게 놀이해요(영유아 놀이 안전)","url":"https://www.youtube.com/watch?v=rMDCY30MEJM","detail":""},{"area":"생활안전","title":"[유]올바른 화장실 사용 및 안전","url":"https://www.youtube.com/watch?v=oEyh3MnOHMc","detail":""},{"area":"생활안전","title":"[유]놀이터 안전하게 이용하기","url":"https://www.youtube.com/watch?v=sBNI4zOPaqQ","detail":""},{"area":"생활안전","title":"계단에서는 조심조심!(기본 생활 습관 교육)","url":"https://www.youtube.com/watch?v=ZN-4wtU4ngk","detail":""},{"area":"생활안전","title":"유치원 안전사고 사례(계단, 복도)","url":"https://www.youtube.com/watch?v=jHec5gzeTSo","detail":""},{"area":"생활안전","title":"영유아 문 끼임 사고 예방하기","url":"https://www.youtube.com/watch?v=EeVtql-BwNI&t=36s","detail":""},{"area":"생활안전","title":"유치원·학교급식 알기 교육자료","url":"https://www.youtube.com/watch?v=u6HZstRf6xc","detail":""},{"area":"생활안전","title":"엘리베이터, 에스컬레이터를 안전하게 이용해요","url":"https://www.youtube.com/watch?v=KaShP5M_-Js","detail":""},{"area":"생활안전","title":"엘리베이터 안전","url":"https://www.youtube.com/watch?v=ho8jMfET3Dk","detail":""},{"area":"생활안전","title":"자동문을 조심해","url":"https://www.youtube.com/watch?v=jT3wtXCgGZ4","detail":""},{"area":"생활안전","title":"[유]다중시설에서 지켜야 할 약속!","url":"https://www.youtube.com/watch?v=MURTHjwz9F4","detail":""},{"area":"생활안전","title":"[유]찌릿! 찌릿! 전기안전","url":"https://www.youtube.com/watch?v=qoiHdOG91mM","detail":""},{"area":"생활안전","title":"장난감 살 때 KC마크 꼭 확인하기!","url":"https://www.youtube.com/watch?v=fkPCaJu9tMo","detail":""},{"area":"생활안전","title":"뾰족하고 날카로운 가위! 지니는 가위가 무서워요","url":"https://www.youtube.com/watch?v=QehhjHuBDSY&t=409s","detail":""},{"area":"생활안전","title":"생활 속 화상을 조심해요!(글루건, 고데기 등)","url":"https://www.youtube.com/watch?v=0Xtm7JC9oaI","detail":""},{"area":"생활안전","title":"따라하면 안 돼요(어린이 화장, 메이크업)","url":"https://www.youtube.com/watch?v=e2UYmqHaoJQ","detail":""},{"area":"생활안전","title":"색조화장을 하면 이런 일이(6~12세)","url":"https://www.youtube.com/watch?v=0z_UMFU6OqQ","detail":""},{"area":"생활안전","title":"안전한 음식 먹어요","url":"https://www.youtube.com/watch?v=uQF8syWsVO8","detail":""},{"area":"생활안전","title":"조심해 알레르기 (6~12세)","url":"https://www.youtube.com/watch?v=zuW2LKEEzuk","detail":""},{"area":"생활안전","title":"[유]요리도구를 안전하게 사용해요","url":"https://www.youtube.com/watch?v=EmBYgDl8l9E","detail":""},{"area":"생활안전","title":"안전하게 공놀이해요","url":"https://www.youtube.com/watch?v=K108ybXwUzQ","detail":""},{"area":"생활안전","title":"체육시간 안전사고 예방","url":"https://www.youtube.com/watch?v=JH0Xd5v8HP8","detail":""},{"area":"교통안전","title":"바깥놀이 할 땐 안전한 옷차림! 차례차례...","url":"https://www.youtube.com/watch?v=4JR3-K-EyTk","detail":""},{"area":"교통안전","title":"실내 놀이터 안전하게 이용해요","url":"https://www.youtube.com/watch?v=ihIV3CEEkUI","detail":""},{"area":"교통안전","title":"놀이공원 갈 때 잊지 말아야 할 것...","url":"https://www.youtube.com/watch?v=W3eq63dKM5Q","detail":""},{"area":"교통안전","title":"생존수영을 배워!","url":"https://www.youtube.com/watch?v=y3JIek7EaFg","detail":""},{"area":"교통안전","title":"신나는 워터파크, 안전하게 이용해요~","url":"https://www.youtube.com/watch?v=KBVVB8fa7CU","detail":""},{"area":"교통안전","title":"[유]우리 가족 등산하는 날","url":"https://www.youtube.com/watch?v=Q3vzH-VSqpw","detail":""},{"area":"교통안전","title":"[유]자전거를 안전하게 타요","url":"https://www.youtube.com/watch?v=nEd-L9o-tkw","detail":""},{"area":"교통안전","title":"자전거, 킥보드 안전하게 타요","url":"https://www.youtube.com/watch?v=kI53m6bvn24","detail":""},{"area":"교통안전","title":"저주 받은 킥보드","url":"https://www.youtube.com/watch?v=WYeJiYzIzRw","detail":""},{"area":"교통안전","title":"숲놀이 현장학습","url":"https://www.youtube.com/watch?v=VZ0MrF4otio","detail":""},{"area":"교통안전","title":"[유]체험활동 중 지켜야 할 약속!(과학관 견학)","url":"https://www.youtube.com/watch?v=MuOuMjYabxQ","detail":""},{"area":"교통안전","title":"[유]현장체험학습을 안전하게 다녀와요(동물원)","url":"https://www.youtube.com/watch?v=eROir5XI2FQ","detail":""},{"area":"교통안전","title":"안전하게 캠핑해요","url":"https://www.youtube.com/watch?v=Mtc_HPzBSq8","detail":""},{"area":"교통안전","title":"길을 잃어버렸어요","url":"https://www.youtube.com/watch?v=mEhkr2pR2fE","detail":""},{"area":"교통안전","title":"[영유아 애니메이션_실종유괴] 누구세요?","url":"https://youtu.be/cuz9If0h3Eg?si=3HWcOHWtXksK7JUR","detail":""},{"area":"교통안전","title":"모두가 함께하는 나침반 안전교육(무단횡단편)","url":"https://www.youtube.com/watch?v=dOdalaL8dOs&t=12s","detail":""},{"area":"교통안전","title":"멈춘다, 살핀다, 건넌다","url":"https://www.youtube.com/watch?v=3Fyo8rlK2gM","detail":""},{"area":"교통안전","title":"횡단보도 건널 때는 이렇게","url":"https://www.youtube.com/watch?v=HoTZ5iqAc-A","detail":""},{"area":"교통안전","title":"아이쿠, 어디로 건너지?(횡단보도안전)","url":"https://www.youtube.com/watch?v=hulDFHBkBBU","detail":""},{"area":"교통안전","title":"폴리, 횡단보도를 건널때는 이렇게","url":"https://www.youtube.com/watch?v=O27qZDeI4CY","detail":""},{"area":"교통안전","title":"아이쿠, 횡단보도 건너기 송","url":"https://www.youtube.com/watch?v=kIWxpz-7SMU","detail":""},{"area":"교통안전","title":"아이쿠, 집으로 가는 길(안전한 보행방법)","url":"https://www.youtube.com/watch?v=HbU102WgF7Q&t=161s","detail":""},{"area":"교통안전","title":"걸어갈 때 한눈 팔지 않아요","url":"https://www.youtube.com/watch?v=RDUtJv14T_c","detail":""},{"area":"교통안전","title":"어른 손을 잡고 걸어요","url":"https://www.youtube.com/watch?v=oa0VAwOG8Nk","detail":""},{"area":"교통안전","title":"안전하게 길 걷기","url":"https://www.youtube.com/watch?v=eso500Q3R5M","detail":""},{"area":"교통안전","title":"차가 멈췄는지 살피고 건너요","url":"https://www.youtube.com/watch?v=WHGrHJQMysQ","detail":""},{"area":"교통안전","title":"교통표지판송, 알록달록 재밌는 도로 위 표지판","url":"https://youtu.be/D_ICk3HXdIY?si=uz1s4HcYeEltTYpM","detail":""},{"area":"교통안전","title":"어린이집 후진 차량에 ‘쾅’, 사망한 2살 아이","url":"https://www.youtube.com/watch?v=AYGf1rDKnNw","detail":""},{"area":"교통안전","title":"아이쿠, 교통안전-사각지대","url":"https://www.youtube.com/watch?v=d3J2c7_uQw4","detail":""},{"area":"교통안전","title":"끊이지 않는 어린이집 통학버스 사고(사각지대)","url":"https://www.youtube.com/watch?v=6Jdo_mnT6Pw","detail":""},{"area":"교통안전","title":"폴리, 사각지대-보이지 않는 위험","url":"https://www.youtube.com/watch?v=ljEPq3taryk","detail":""},{"area":"교통안전","title":"폴리, 주차장에서 장난을 치면 안돼요","url":"https://www.youtube.com/watch?v=oumhI2HrVAw","detail":""},{"area":"교통안전","title":"이면도로 우측보행이 좌측보행보다 더 위험","url":"https://www.youtube.com/watch?v=GX_sf6OeRzI","detail":""},{"area":"교통안전","title":"주정차 사각지대 아동사고 속출","url":"https://www.youtube.com/watch?v=FovQ6Sc8k1Q","detail":""},{"area":"교통안전","title":"모두가 함께하는 나침반 안전교육[스쿨존편]","url":"https://www.youtube.com/watch?v=wGvgcVTutew&t=10s","detail":""},{"area":"교통안전","title":"폴리, 두 얼굴의 학교길","url":"https://www.youtube.com/watch?v=mEynMB9yWxw","detail":""},{"area":"교통안전","title":"모두가 함께하는 나침반 안전교육(스쿨존편)","url":"https://www.youtube.com/watch?v=wGvgcVTutew&t=11s","detail":""},{"area":"교통안전","title":"횡단보도 앞에서는 일이삼사","url":"https://youtu.be/V9BllPLYcIs?si=Ra5cfmpY_eiKyRBd","detail":""},{"area":"교통안전","title":"폴리, 눈 오는 날의 안전수칙","url":"https://www.youtube.com/watch?v=_UNZCpjwFNk","detail":""},{"area":"교통안전","title":"폴리, 비 오는 날의 안전수칙","url":"https://www.youtube.com/watch?v=htn4MWRNbYY","detail":""},{"area":"교통안전","title":"눈 오는 날 자동차 사고, 맑은 날보다 1.5배","url":"https://www.youtube.com/watch?v=6Rvbw7uLUhk","detail":""},{"area":"교통안전","title":"아이쿠, 누가 하늘에서 물을 뿌려!","url":"https://www.youtube.com/watch?v=L9IATmWsirM","detail":""},{"area":"교통안전","title":"비 오는 날 안전 수칙 뮤직비디오","url":"https://www.youtube.com/watch?v=0ebSlbhELaI","detail":""},{"area":"교통안전","title":"비 오는 날, 토토의 하루","url":"https://www.youtube.com/watch?v=AniJV_UHTs8","detail":""},{"area":"교통안전","title":"어두울 땐 밝은 옷을 입어요","url":"https://youtu.be/x4SYCdXHGHI?si=FJGroRe1r39TEahk","detail":""},{"area":"교통안전","title":"위험천만 밤길 자전거 주행, 한 해 300명 사망","url":"https://www.youtube.com/watch?v=n03n8mguXaI","detail":""},{"area":"교통안전","title":"달려라 아이쿠, 날아라 비비, 자전거 안전","url":"https://www.youtube.com/watch?v=zsTC0dtEafo","detail":""},{"area":"교통안전","title":"폴리, 자전거 안전 시험","url":"https://www.youtube.com/watch?v=YG400sbWgX8","detail":""},{"area":"교통안전","title":"폴리, 자전거를 안전하게 타려면","url":"https://www.youtube.com/watch?v=1kKNB2VoDRQ","detail":""},{"area":"교통안전","title":"국민이 안전이와 함께 안전하게 타기","url":"https://www.youtube.com/watch?v=tGppp-eFoFo","detail":""},{"area":"교통안전","title":"폴리, 오토바이를 조심해","url":"https://www.youtube.com/watch?v=Lr0516UWGII","detail":""},{"area":"교통안전","title":"아이쿠, 차량탑승 안전","url":"https://www.youtube.com/watch?v=HKtfFdwU_UY","detail":""},{"area":"교통안전","title":"차를 탈땐 안전벨트를 꼭 매요","url":"https://www.youtube.com/watch?v=axn6lwHa3Rg","detail":""},{"area":"교통안전","title":"터널 속 유치원 버스 넘어져, 안전벨트 빛났다.","url":"https://www.youtube.com/watch?v=baeC8fqP5Fk","detail":""},{"area":"교통안전","title":"어린이집 통학차량 3m 추락, 참변 막은 안전벨트","url":"https://www.youtube.com/watch?v=0M2Z3j974qM","detail":""},{"area":"교통안전","title":"아이쿠, 안전한 지하철 이용","url":"https://www.youtube.com/watch?v=YCAtmeC_v6I&t=11s","detail":""},{"area":"교통안전","title":"아이쿠, 안전한 버스 탑승","url":"https://www.youtube.com/watch?v=zFedo1llpVc","detail":""},{"area":"교통안전","title":"고고다이노, 지하철 안전","url":"https://www.youtube.com/watch?v=EUt9dNoTIqg","detail":""},{"area":"교통안전","title":"고고다이노, 버스 안전","url":"https://www.youtube.com/watch?v=ebFnQi-3ef8","detail":""},{"area":"교통안전","title":"스쿨버스송","url":"https://youtu.be/rZtypalhWpY?si=0HbXB35irfzuN3O5","detail":""},{"area":"교통안전","title":"번개맨과 함께하는 통학버스 안전","url":"https://www.youtube.com/watch?v=g-dkl77YOos","detail":""},{"area":"교통안전","title":"통학버스를 안전하게 이용해요","url":"https://youtu.be/vzP1nlpiaWs?si=wBG8xgTNfAL2CQZw","detail":""},{"area":"교통안전","title":"폴리, 교통사고가 났을 때의 대처방법","url":"https://www.youtube.com/watch?v=xc1eTFtz5po","detail":""},{"area":"교통안전","title":"교통사고가 났을 때의 대처방법","url":"https://www.youtube.com/watch?v=CkFm4M3lgUw","detail":""},{"area":"교통안전","title":"자동차 사고 대처법","url":"https://www.youtube.com/watch?v=eCtouI7zMfs","detail":""},{"area":"교통안전","title":"어린이 교통사고 5가지 유형","url":"https://youtu.be/qfkicH0qxho?si=TX8yCAwvd8KLYV2V","detail":""},{"area":"교통안전","title":"캐릭터 호보트가 알려주는 선상 안전수칙","url":"https://youtu.be/f_roPTrkWZM?si=huGAnPI80kSgXWki","detail":""},{"area":"교통안전","title":"항공기 사고 대처법","url":"https://www.youtube.com/watch?v=t3Ch03I9nac","detail":""},{"area":"교통안전","title":"구명동의 착용법","url":"https://www.youtube.com/watch?v=uflC1pe4WjI","detail":""},{"area":"교통안전","title":"이륙 후 3분, 착륙 전 8분이 중요한 이유","url":"https://youtu.be/YxXeF_gBj-Q?si=U8-FKkh5-MVhRSYA","detail":""},{"area":"교통안전","title":"귀여운 황구가 소개하는 NEW, 기내안전영상","url":"https://youtu.be/zgoiwCT0rPk?si=cRwnHxFLVMJIgrts","detail":""},{"area":"폭력예방 및 신변안전","title":"모두가 함께하는 나침반 안전교육(언어폭력)","url":"https://www.youtube.com/watch?v=RyfXSBm4DUY","detail":""},{"area":"폭력예방 및 신변안전","title":"우당당탕 은하안전단 29화:언어폭력(불러봐!박살래퍼!)","url":"https://www.youtube.com/watch?v=vhDARYK7CvU","detail":"2분46초, 출처 한국교육개발원"},{"area":"폭력예방 및 신변안전","title":"사이버폭력 대응교육 홍보 애니메이션","url":"https://www.youtube.com/watch?v=mhm0MM0jI1c","detail":"2분28초, 출처: SBS 뉴스"},{"area":"폭력예방 및 신변안전","title":"학교폭력 형태별 교육","url":"https://www.youtube.com/watch?v=dvX_I6Z5LC4","detail":"2분 27초, 출처: 초등백과"},{"area":"폭력예방 및 신변안전","title":"왕따없는 학교를 만들어요","url":"https://www.youtube.com/watch?v=Sqh1ZyY9U88","detail":""},{"area":"폭력예방 및 신변안전","title":"가정폭력 예방 홍보동영상https://www.youtube.com/watch?v=Jz2sAi7s2H0[30초, 출처 : 학교안전공제중앙회]초등고중/고가정폭력제목: 가정폭력(무서워! 늑대의 공격)","url":"https://www.youtube.com/watch?v=Xi3D47nF67g","detail":""},{"area":"폭력예방 및 신변안전","title":"이런 행동도 ‘아동 학대’, 부모들의 실수 3가지","url":"https://www.youtube.com/watch?v=IgdVQptNHag","detail":"3분32초, 출처: 행정안전부"},{"area":"폭력예방 및 신변안전","title":"이런 행동도 ‘아동 학대’, 부모들의 실수 3가지https://www.youtube.com/watch?v=IgdVQptNHag[3분 50초, 출처 : YTN NEWS]유초등저초등고아동학대제목: 마음까지 멍들게 하는 아동학대, 적극적으로 도와주세요!","url":"https://www.youtube.com/watch?v=FPVHmdbg12w","detail":""},{"area":"폭력예방 및 신변안전","title":"라바, 아동학대예방 캠페인","url":"https://www.youtube.com/watch?v=iJjeBSzgmOU","detail":""},{"area":"폭력예방 및 신변안전","title":"안전의 발견, 아름이의 그림 일기https://www.youtube.com/watch?v=P-c04IVlE-M[2분 36초, 출처 : SAFE TV]초등저초등고아동학대제목: 나를 지키면 행복할 수 있어요","url":"https://www.youtube.com/watch?v=IbYEXFb-n68","detail":"29초, 출처: 유니세프 코리아"},{"area":"폭력예방 및 신변안전","title":"안전의 발견, 아름이의 그림 일기https://www.youtube.com/watch?v=P-c04IVlE-M[2분 36초, 출처 : SAFE TV]초등저초등고아동학대제목: 나를 지키면 행복할 수 있어요https://www.youtube.com/watch?v=IbYEXFb-n68[11분 52초, 출처: 아동권리 보장원]유초등저초등고아동학대제목: 아동학대 지워지지 않는 상처","url":"https://www.youtube.com/watch?v=IiY6HdnfZ6Y","detail":"3분 50초, 출처: EBS 컬처"},{"area":"폭력예방 및 신변안전","title":"우리는 소중해요","url":"https://www.youtube.com/watch?v=H33w7Y72U0s","detail":"5분 5초, 출처: 동양고 생활안전부 교육채널"},{"area":"폭력예방 및 신변안전","title":"우리는 소중해요https://www.youtube.com/watch?v=H33w7Y72U0s[3분 28초, 출처 : 아동안전사이버교육센터]유초등저아동학대제목: 아동학대 예방교육","url":"https://www.youtube.com/watch?v=FejN9rwBl5k","detail":""},{"area":"폭력예방 및 신변안전","title":"가정 폭력으로 미소를 잃은 내 친구","url":"https://www.youtube.com/watch?v=wRbQbymf1iM","detail":"5분 55초, 출처: 초등생활 디자이너"},{"area":"폭력예방 및 신변안전","title":"가정 폭력으로 미소를 잃은 내 친구https://www.youtube.com/watch?v=wRbQbymf1iM[3분 22초, 출처 : 아동안전지킴이]유초등저 성폭력성폭력제목: 초등학생을 위한 성교육 (학생편)https://www.youtube.com/watch?v=XnmjGcXMHzU&list=PLLs_U57dGCkD2hMvYCWzLbUua4nLPGX_5[5분 55초, 출처: 초등생활 디자이너]초등고성폭력제목: 우리는 함께 자라요!","url":"https://www.youtube.com/watch?v=DUyQz8R7S_k&list=PLLs_U57dGCkD2hMvYCWzLbUua4nLPGX_5&index=3","detail":""},{"area":"폭력예방 및 신변안전","title":"보여줄 수 없는 곳이 있어요","url":"https://www.youtube.com/watch?v=s-YRze6anH4","detail":""},{"area":"폭력예방 및 신변안전","title":"디지털 성범죄 예방https://www.youtube.com/watch?v=uDcQjao9tkg[4분 56초, 출처 : 여성가족부]초등저초등고디지털성폭력제목:딥페이크 성범죄 피해의 심각성, 예방 및 대응 방안은?https://www.youtube.com/watch?v=dPLT3eahMnA[2분 6초, 출처: 대한민국정부]초등고중/고 생명존중, 자살예방생명존중제목: 나의 작은 힘이 세상을 살려요-초등 생명 존중 교육 동화 (자존감, 존재 이유 찾기)","url":"https://www.youtube.com/watch?v=plOVok1Plv4","detail":"4분 54초, 출처: 충남광역정신건강복지센터"},{"area":"폭력예방 및 신변안전","title":"디지털 성범죄 예방https://www.youtube.com/watch?v=uDcQjao9tkg[4분 56초, 출처 : 여성가족부]초등저초등고디지털성폭력제목:딥페이크 성범죄 피해의 심각성, 예방 및 대응 방안은?https://www.youtube.com/watch?v=dPLT3eahMnA[2분 6초, 출처: 대한민국정부]초등고중/고 생명존중, 자살예방생명존중제목: 나의 작은 힘이 세상을 살려요-초등 생명 존중 교육 동화 (자존감, 존재 이유 찾기)https://www.youtube.com/watch?v=plOVok1Plv4[4분 17초, 출처: 용툰과 교육영상]유초등저초등고생명존중제목:아동 생명존중 교육 동영상 ‘생명은 소중해‘","url":"https://www.youtube.com/watch?v=IXjj669xHKU","detail":"2분 24초, 출처:나우톡해 청소년모바일상담센터"},{"area":"약물‧사이버 중독예방","title":"아이쿠, 보물찾기 대소동(약물안전)","url":"https://www.youtube.com/watch?v=bDCh7e9MCW0","detail":""},{"area":"약물‧사이버 중독예방","title":"약을 올바르게 사용해요","url":"https://www.youtube.com/watch?v=kUpBH82YYXY","detail":""},{"area":"약물‧사이버 중독예방","title":"약을 올바르게 먹어요","url":"https://www.youtube.com/watch?v=0wzPEUDEmqM","detail":""},{"area":"약물‧사이버 중독예방","title":"약은 간식이 아니야","url":"https://www.youtube.com/watch?v=n1ee6_250D4","detail":""},{"area":"약물‧사이버 중독예방","title":"아이쿠, 위험한 소꿉놀이(중독사고 예방)","url":"https://www.youtube.com/watch?v=OF9rkzN6P5s","detail":""},{"area":"약물‧사이버 중독예방","title":"음주운전 금지 캠페인(라바 애니메이션)","url":"https://www.youtube.com/watch?v=MLaiaHefJuA","detail":""},{"area":"약물‧사이버 중독예방","title":"번개맨과 함께하는 유아 흡연예방 교육","url":"https://www.youtube.com/watch?v=mtkOZXSR_4Q","detail":""},{"area":"약물‧사이버 중독예방","title":"아이쿠, 어린이 흡연예방, 노!스모킥","url":"https://www.youtube.com/watch?v=NzXZkB2DnFA","detail":""},{"area":"약물‧사이버 중독예방","title":"유아흡연예방교육지침서(종합)","url":"https://www.youtube.com/watch?v=OhuiqXp5B00","detail":""},{"area":"약물‧사이버 중독예방","title":"담배 연기는 싫어!","url":"https://www.youtube.com/watch?v=ET6pIKrZxUM","detail":""},{"area":"약물‧사이버 중독예방","title":"아이쿠, 인터넷모험","url":"https://www.youtube.com/watch?v=5lcvVKVW30A","detail":""},{"area":"약물‧사이버 중독예방","title":"10분만 해요","url":"https://www.youtube.com/watch?v=pneBS_ZUSNU","detail":""},{"area":"약물‧사이버 중독예방","title":"아이쿠, 게임중독예방","url":"https://www.youtube.com/watch?v=Eu4936mQBWA","detail":""},{"area":"약물‧사이버 중독예방","title":"나의 첫 스마트폰","url":"https://www.youtube.com/watch?v=FSiXB75qzsM","detail":""},{"area":"재난안전","title":"불괴물이 나타나면?","url":"https://www.youtube.com/watch?v=drAQ8rNon-A","detail":""},{"area":"재난안전","title":"불이났어요","url":"https://www.youtube.com/watch?v=s-fqfsDMZi4","detail":""},{"area":"재난안전","title":"불이야! 화재대피 송","url":"https://www.youtube.com/watch?v=iCwGq23_hXc","detail":""},{"area":"재난안전","title":"모두가 함께하는 나침반 안전교육(화재안전편)","url":"https://www.youtube.com/watch?v=Y6BvFIYYRo4&t=24s","detail":""},{"area":"재난안전","title":"불이야 불이야","url":"https://www.youtube.com/watch?v=XVNGoptkYAY","detail":""},{"area":"재난안전","title":"학교에서 불이 나면 어떻게 해야 하죠?","url":"https://www.youtube.com/watch?v=0VW6wcg2E2Q","detail":""},{"area":"재난안전","title":"화재발생 주요원인 및 대책","url":"https://www.youtube.com/watch?v=AYVH1RbAE3w","detail":""},{"area":"재난안전","title":"어린이 화재 신고 및 실천 방법","url":"https://www.youtube.com/watch?v=oUtbrw3I8kE&t=1s","detail":""},{"area":"재난안전","title":"아이쿠의 탈출작전(안전한 대피로 찾기)","url":"https://www.youtube.com/watch?v=dgy-aOPgJs8","detail":""},{"area":"재난안전","title":"국민이 안전이와 함께하는 화재 안전수칙","url":"https://www.youtube.com/watch?v=YZlIuw45364","detail":""},{"area":"재난안전","title":"올바른 119 신고방법","url":"https://www.youtube.com/watch?v=t1jKgfAVisk","detail":""},{"area":"재난안전","title":"소화기 종류 및 사용법","url":"https://www.youtube.com/watch?v=FBi2Vt0CJdM","detail":""},{"area":"재난안전","title":"우리들의 짱가 소방관이 알려주는 소화기 사용 노하우","url":"https://www.youtube.com/watch?v=nWAQNeptBKc","detail":""},{"area":"재난안전","title":"소화기를 알아요","url":"https://www.youtube.com/watch?v=uRwlpIWz-Do","detail":""},{"area":"재난안전","title":"최고다! 호기심딱지 - 소화기야! 불을 부탁해","url":"https://www.youtube.com/watch?v=BRL18vx-T-4","detail":""},{"area":"재난안전","title":"아이쿠, 원시시대에 가다(화재 예방)","url":"https://www.youtube.com/watch?v=IIDhhV-CeiI&feature=youtu.be","detail":""},{"area":"재난안전","title":"황사와 미세먼지는 위험해요","url":"https://www.youtube.com/watch?v=VxpvzuOScjE","detail":""},{"area":"재난안전","title":"재난안전 황사와 미세먼지가 찾아왔어요","url":"https://www.youtube.com/watch?v=OfGWk00S7gk","detail":""},{"area":"재난안전","title":"영유아를 위한 미세먼지 안전송","url":"https://www.youtube.com/watch?v=_o0LyMw10z0","detail":""},{"area":"재난안전","title":"미세먼지송","url":"https://www.youtube.com/watch?v=X3BJ4aLr96o&t=10s","detail":""},{"area":"재난안전","title":"최고다! 호기심딱지-미세먼지가 뭔지","url":"https://www.youtube.com/watch?v=utgkCGWLME0","detail":""},{"area":"재난안전","title":"미세먼지를 예방하는 7가지 행동 수칙(송)","url":"https://www.youtube.com/watch?v=3ENifYzsWHM","detail":""},{"area":"재난안전","title":"콜록콜록! 이 까만 것의 정체는?","url":"https://www.youtube.com/watch?v=7OUa-GD9Cnc&t=38s","detail":""},{"area":"재난안전","title":"국민이 안전이와 함께하는 황사와 미세먼지 안전수칙","url":"https://www.youtube.com/watch?v=fzXv67DU5fw","detail":""},{"area":"재난안전","title":"어린이들이 미세먼지 괴물을 물리치는 방법!","url":"https://www.youtube.com/watch?v=FiBo-BTMnu4","detail":""},{"area":"재난안전","title":"가스 냄새가 나요","url":"https://www.youtube.com/watch?v=Mhb5HvqRRZs","detail":""},{"area":"재난안전","title":"최고다! 호기심딱지-BTG와 함께하는 가스 안전","url":"https://www.youtube.com/watch?v=OxgOLdY5qo0","detail":""},{"area":"재난안전","title":"폭염송","url":"https://www.youtube.com/watch?v=102uISdKsRk&t=6s","detail":""},{"area":"재난안전","title":"함께 따라 불러요! 내 몸을 폭염에서 지키는 방법","url":"https://www.youtube.com/watch?v=3OZHmwIhhnk","detail":""},{"area":"재난안전","title":"열사병을 조심해","url":"https://www.youtube.com/watch?v=X_U9l8yMrFc","detail":""},{"area":"재난안전","title":"폭염으로부터 건강을 지키는 방법","url":"https://www.youtube.com/watch?v=0gu2fw06qdY","detail":""},{"area":"재난안전","title":"폭염 예방","url":"https://www.youtube.com/watch?v=3RmeTPTcXRY","detail":""},{"area":"재난안전","title":"국민이&안전이와 함께 배우는 낙뢰 발생시 행동요령!","url":"https://www.youtube.com/watch?v=MuBHWQyAOc8","detail":""},{"area":"재난안전","title":"홍수가 났어요","url":"https://www.youtube.com/watch?v=fb67VV1PsGU","detail":""},{"area":"재난안전","title":"[도전 안전벨] 낙뢰","url":"https://www.youtube.com/watch?v=H5OS37sF_Mg","detail":""},{"area":"재난안전","title":"여름철 집중호우 및 산사태 대비 안전수칙","url":"https://www.youtube.com/watch?v=hVxlJzKgkFQ","detail":""},{"area":"재난안전","title":"태풍과 홍수에 대비해요","url":"https://www.youtube.com/watch?v=VJYjZB3JIGU&t=9s","detail":""},{"area":"재난안전","title":"펭수가 알려주는 ‘홍수’ 대피법","url":"https://www.youtube.com/watch?v=HLFBESVTaJs","detail":""},{"area":"재난안전","title":"태풍/집중호우 - 국민행동요령","url":"https://www.youtube.com/watch?v=amRl5JiatYU","detail":""},{"area":"재난안전","title":"콩이와 흔들흔들 땅(재난안전 지진편)","url":"https://www.youtube.com/watch?v=ZxVfX7O-zKY","detail":""},{"area":"재난안전","title":"[도전 안전벨] 지진","url":"https://www.youtube.com/watch?v=cqJTcgfGH-M","detail":""},{"area":"재난안전","title":"아이쿠, 누가 집을 흔들어(지진발생 안전)","url":"https://www.youtube.com/watch?v=MYfF2SJ-4JE","detail":""},{"area":"재난안전","title":"국민이 안전이와 함께하는 지진 안전수칙","url":"https://www.youtube.com/watch?v=7UlVox6ejRc","detail":""},{"area":"재난안전","title":"지진, 지진해일 대응요령","url":"https://www.youtube.com/watch?v=Fx6Dpef8NAo","detail":""},{"area":"재난안전","title":"모두가 함께하는 나침반 안전교육(지진/해일편)","url":"https://www.youtube.com/watch?v=k-k5daYv0wE","detail":""},{"area":"재난안전","title":"지진해일","url":"https://www.youtube.com/watch?v=Q-1HnyChmjY","detail":""},{"area":"재난안전","title":"경기도교육청 나침반 안전교육 대설한파편","url":"https://www.youtube.com/watch?v=Q2r2ojKeXKo","detail":""},{"area":"재난안전","title":"쌓이면 무서운 재난이 되는 눈! 대설 안전수칙","url":"https://www.youtube.com/watch?v=4RTKST09z9w","detail":""},{"area":"재난안전","title":"대설 행동요령","url":"https://www.youtube.com/watch?v=YnupWlQROxE","detail":""},{"area":"재난안전","title":"한파폭설","url":"https://www.youtube.com/watch?v=ihvT3Vq62eU","detail":""},{"area":"직업안전","title":"안전한 작업! 행복한 학교!","url":"https://www.youtube.com/watch?v=3RAi3YGonfo","detail":""},{"area":"직업안전","title":"제조업 안전수칙 웹툰 “콩쥐팥쥐”","url":"https://www.youtube.com/watch?v=W8WIO_HobxU","detail":""},{"area":"직업안전","title":"중대재해처벌법을 쉽게 알려줄게","url":"https://youtu.be/VRWIz0t9f-g?si=fawy2CqIY8XFYaJh","detail":""},{"area":"직업안전","title":"직업에 따라 필요한 보호구 알아보기","url":"https://youtu.be/8fYxXQFOqt0?si=AH3wHe74fwSMcWAG","detail":""},{"area":"직업안전","title":"연예인 장성규가 전하는 안전(안전불감증)","url":"https://youtu.be/2ZmtC8pzxGQ?si=JB0WkygBHekYUfeB","detail":""},{"area":"직업안전","title":"가천대학교 보건대학원장이 전하는 직업안전","url":"https://youtu.be/oup2ZCAiHas?si=aRdhkMgPCWPpofLa","detail":""},{"area":"직업안전","title":"직업병, 당신도 안전할까요?","url":"https://youtu.be/PCufMoLC970?si=oaiRwR4_aIm7qXWv","detail":""},{"area":"직업안전","title":"전 세계 최악의 산업재해 안전사고 5가지","url":"https://youtu.be/_wncDirFANE?si=RNUMbTUe4ZuKoVCk","detail":""},{"area":"응급처치","title":"안전의 시작 직업병, 직업환경의학전문의 강성규https://www.youtube.com/watch?v=EaC6qYz-CG4[17분 28초, 출처 : 세바시]중/고사 응급처치 응급처치의 이해와 필요성응급상황 대처요령제목: 엄마가 아파요","url":"https://www.youtube.com/watch?v=UaYihcTj7lM","detail":"10분 12초, 출처: 학교안전공제중앙회"},{"area":"응급처치","title":"안전의 시작 직업병, 직업환경의학전문의 강성규https://www.youtube.com/watch?v=EaC6qYz-CG4[17분 28초, 출처 : 세바시]중/고사 응급처치 응급처치의 이해와 필요성응급상황 대처요령제목: 엄마가 아파요https://www.youtube.com/watch?v=UaYihcTj7lM[3분 43초, 출처: 아동안전사이버교육센터]유초등저응급상황대처요령제목: 응급상황! 이렇게 대처해요!","url":"https://www.youtube.com/watch?v=fSfXUZhYCzQ","detail":"5분 8초, KBS 키즈"},{"area":"응급처치","title":"안전의 시작 직업병, 직업환경의학전문의 강성규https://www.youtube.com/watch?v=EaC6qYz-CG4[17분 28초, 출처 : 세바시]중/고사 응급처치 응급처치의 이해와 필요성응급상황 대처요령제목: 엄마가 아파요https://www.youtube.com/watch?v=UaYihcTj7lM[3분 43초, 출처: 아동안전사이버교육센터]유초등저응급상황대처요령제목: 응급상황! 이렇게 대처해요!https://www.youtube.com/watch?v=fSfXUZhYCzQ[10분 12초, 출처: 학교안전공제중앙회]유초등저응급상황대처요령제목: 위급상황 119 신고 요령","url":"https://www.youtube.com/watch?v=6M0wQxJF2iU","detail":"6분 24초, 출처: 경기도교육청"},{"area":"응급처치","title":"모두가 함께하는 나침반 안전교육(응급처치편)","url":"https://www.youtube.com/watch?v=yKn0RgwS8QM","detail":"12분 9초, 출처: 울산광역시교육청"},{"area":"응급처치","title":"심폐소생술 배워볼까요?","url":"https://www.youtube.com/watch?v=5wAjKP2gFXI","detail":"4분 7초, 출처: 안전보건공단"},{"area":"응급처치","title":"안젤이, 보건이와 함께하는 안전생활","url":"https://www.youtube.com/watch?v=pVanExoXDP4","detail":"3분 57초, 출처: 질병관리청 아프지마 TV"},{"area":"응급처치","title":"심폐소생술 홍보애니메이션","url":"https://www.youtube.com/watch?v=GqguzASF-W4","detail":"2분 25초, 출처: 연합뉴스 TV"},{"area":"응급처치","title":"“배운 대로 했어요” 심폐소생술로 엄마 살린 초등생","url":"https://www.youtube.com/watch?v=DYWN5KoQDZs","detail":"2분 14초, 출처: YTN"},{"area":"응급처치","title":"멈췄던 심장 뛰게 한 시민 영웅들","url":"https://www.youtube.com/watch?v=XVUgO6hLWiE","detail":"3분 1초, 출처: 대한적십자사"},{"area":"응급처치","title":"자동제세동기 사용법","url":"https://www.youtube.com/watch?v=iiNGnt-uu70","detail":"3분 56초, 출처: 대한적십자사"},{"area":"응급처치","title":"아이쿠, 질식예방","url":"https://www.youtube.com/watch?v=jpJB-dFSN_g","detail":"5분 16초, 출처: KBS 키즈"},{"area":"응급처치","title":"코피날 때 응급처치방법","url":"https://www.youtube.com/watch?v=ucJXU39Yg5w","detail":"2분 48초, 출처: 아동안전사이버교육센터"},{"area":"응급처치","title":"한결이가 아파요(상처)","url":"https://www.youtube.com/watch?v=8PcXONDHIn8","detail":"3분 12초, 출처: 경기도교육청"},{"area":"응급처치","title":"코피 났을 때 어떻게 할까요?","url":"https://www.youtube.com/watch?v=_S3mtXmVAes","detail":"4분 3초, 출처: 놀이ON(경기도교육청)"},{"area":"응급처치","title":"유치원 안전교육 응급처치 삐뽀삐뽀 염좌","url":"https://www.youtube.com/watch?v=nf1jPPCHZ0M","detail":"10분 10초, 출처: EBS 키즈"},{"area":"응급처치","title":"삐뽀삐뽀! 우리몸 X파일 - 다리가 부러졌어요","url":"https://www.youtube.com/watch?v=V8Z89aTCiHo","detail":"12분 18초, 출처: EBS 키즈"},{"area":"응급처치","title":"표피장군도 못 막는 화상","url":"https://www.youtube.com/watch?v=DZtXvJCNjLU","detail":"2분 20초, 출처: 강원소방본부"},{"area":"응급처치","title":"화상을 입었을 때 어떻게 해야 할까요?","url":"https://www.youtube.com/watch?v=7BwpLTNx5QE","detail":"3분 11초, 출처: 경기도교육청"},{"area":"응급처치","title":"화상 입으면 어떻게 할까요?","url":"https://www.youtube.com/watch?v=DyULWoNZeKw","detail":"5분 22초, 출처: KBS 키즈"},{"area":"응급처치","title":"여름이 위험해요! 열사병, 냉방병 응급처치","url":"https://www.youtube.com/watch?v=XL7rbY_e2ks","detail":"23분 39초, 출처: EBS 키즈"},{"area":"응급처치","title":"내가 열사병에 걸렸다고?","url":"https://www.youtube.com/watch?v=aNqnyDHPAKg","detail":"13분 15초, 출처: EBS 키즈"},{"area":"응급처치","title":"꽁꽁 동상에 걸렸어요","url":"https://www.youtube.com/watch?v=4blmOcuC4pM","detail":"16분 56초, 출처: EBS 키즈"},{"area":"응급처치","title":"겨울철 감기 조심! 감기, 저체온증","url":"https://www.youtube.com/watch?v=Cusm-suq9EI","detail":"9분 11초, 출처: 학교안전공제중앙회"},{"area":"응급처치","title":"동물 물림 사고, 이렇게 조심해요!","url":"https://www.youtube.com/watch?v=IZF25ji0oN8","detail":"9분 8초, 출처: 학교안전공제중앙회"}];
-const areas=[["생활안전", "🏠", "실내·놀이·시설·전기·식품 등 생활 속 안전"], ["교통안전", "🚦", "안전하게 걷고 타는 교통 약속"], ["폭력예방 및 신변안전", "🧡", "나와 친구를 지키는 안전한 관계"], ["약물‧사이버 중독예방", "📵", "약물 오남용과 디지털 기기 안전"], ["재난안전", "🔥", "화재·자연재난 상황에서의 대처"], ["직업안전", "🦺", "일터와 직업 활동에서의 안전"], ["응급처치", "🩹", "아프거나 다쳤을 때의 대처와 도움 요청"]];
+const areas=[
+ ["생활안전","🏠","실내·놀이·시설·전기·식품 등 생활 속 안전"],
+ ["교통안전","🚦","안전하게 걷고 타는 교통 약속"],
+ ["응급처치","🩹","아프거나 다쳤을 때의 대처와 도움 요청"],
+ ["폭력예방 및 신변안전","🧡","나와 친구를 지키는 안전한 관계"],
+ ["약물‧사이버 중독예방","📵","약물 오남용과 디지털 기기 안전"],
+ ["재난안전","🔥","화재·자연재난 상황에서의 대처"],
+ ["직업안전","🦺","일터와 직업 활동에서의 안전"]
+];
 const STORE='rasSafetyWatched2026';
-// 순환 시작일: 2026년 11월 16일을 1일차(생활안전)로 하여 매일 다음 영역으로 이동합니다.
 const ROTATION_START='2026-11-16';
-function getTodayAreaIndex(){
-  const [y,m,d]=ROTATION_START.split('-').map(Number);
-  const start=Date.UTC(y,m-1,d);
-  const now=new Date();
-  const today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
-  const days=Math.floor((today-start)/86400000);
-  return ((days%areas.length)+areas.length)%areas.length;
+function dayNumber(){
+ const [y,m,d]=ROTATION_START.split('-').map(Number);
+ const start=Date.UTC(y,m-1,d);
+ const now=new Date();
+ const today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+ return Math.max(0,Math.floor((today-start)/86400000));
 }
-function getTodayArea(){return areas[getTodayAreaIndex()];}
-let active=getTodayArea()[0];
-let watched=JSON.parse(localStorage.getItem(STORE)||'{}');
-const tabs=document.getElementById('tabs'),content=document.getElementById('content');
-function updateProgress(){const n=Object.values(watched).filter(Boolean).length;document.getElementById('progress').textContent=`시청 완료 ${n} / ${videos.length}`;}
-function drawTabs(){
-const today=getTodayArea();
-const dayNo=Math.floor((Date.UTC(new Date().getFullYear(),new Date().getMonth(),new Date().getDate())-Date.UTC(2026,10,16))/86400000)+1;
-document.getElementById('dailyArea').innerHTML=`<strong>🌞 오늘의 안전교육 · ${today[1]} ${today[0]}</strong><span>${dayNo>0?dayNo+'일차 · ':''}${today[2]}<br>오늘은 이 영역의 영상을 중심으로 안전 약속을 배워요. 내일은 다음 영역으로 자동 변경됩니다.</span>`;
-tabs.innerHTML='';
-const todayBtn=document.createElement('button');todayBtn.className='tab'+(active===today[0]?' active':'');todayBtn.innerHTML=`🌞 오늘의 영역<small>${today[0]} 영상 보기</small>`;todayBtn.onclick=()=>{active=today[0];render()};tabs.appendChild(todayBtn);
-const all=document.createElement('button');all.className='tab'+(active==='전체'?' active':'');all.innerHTML='📚 전체 영역<small>전체 영상 모아보기</small>';all.onclick=()=>{active='전체';render()};tabs.appendChild(all);
-areas.forEach(([name,icon,desc])=>{const b=document.createElement('button');b.className='tab'+(active===name?' active':'');b.innerHTML=`${icon} ${name}<small>${videos.filter(v=>v.area===name).length}개 영상</small>`;b.onclick=()=>{active=name;render()};tabs.appendChild(b)});}
-function render(){drawTabs();const q=document.getElementById('search').value.trim().toLowerCase();content.innerHTML='';
-const groups=active==='전체'?areas:areas.filter(a=>a[0]===active);
-let shown=0;
-groups.forEach(([name,icon,desc])=>{const list=videos.filter(v=>v.area===name&&(!q||(v.title+' '+v.area).toLowerCase().includes(q)));if(!list.length)return;shown+=list.length;
-const h=document.createElement('h2');h.className='area-heading';h.textContent=icon+' '+name;content.appendChild(h);
-const p=document.createElement('p');p.className='area-desc';p.textContent=desc;content.appendChild(p);
-const grid=document.createElement('div');grid.className='cards';
-list.forEach((v)=>{const idx=videos.indexOf(v);const id=String(idx);const card=document.createElement('article');card.className='video'+(watched[id]?' done':'');
-const check=document.createElement('input');check.type='checkbox';check.className='check';check.checked=!!watched[id];check.setAttribute('aria-label','시청 완료 체크');check.onchange=()=>{watched[id]=check.checked;localStorage.setItem(STORE,JSON.stringify(watched));render();};
-const body=document.createElement('div');body.style.flex='1';const title=document.createElement('p');title.className='vtitle';title.textContent=v.title;const meta=document.createElement('div');meta.className='meta';meta.textContent='유치원 대상 · 나침반 안전교육 영상';const a=document.createElement('a');a.className='watch';a.href=v.url;a.target='_blank';a.rel='noopener';a.textContent='▶ 영상 바로 보기';body.append(title,meta,a);card.append(check,body);grid.appendChild(card);});
-content.appendChild(grid);});
-if(!shown)content.innerHTML='<div class="empty">검색 결과가 없습니다. 다른 검색어를 입력해 보세요.</div>';updateProgress();}
-document.getElementById('search').addEventListener('input',render);render();
+function getDailyVideo(){
+ const day=dayNumber();
+ const area=areas[day%areas.length];
+ const list=videos.filter(v=>v.area===area[0]);
+ if(!list.length)return null;
+ const video=list[Math.floor(day/areas.length)%list.length];
+ return {area,video,day};
+}
+let watched={};
+try{watched=JSON.parse(localStorage.getItem(STORE)||'{}')||{};}catch(e){watched={};}
+const content=document.getElementById('content');
+let currentView='today';
+let currentArea='';
+function updateProgress(){
+ const n=Object.values(watched).filter(Boolean).length;
+ document.getElementById('progress').textContent=`시청 완료 ${n} / ${videos.length}`;
+}
+function setActiveTab(){
+ document.querySelectorAll('.tab').forEach(btn=>{
+   const active=(btn.dataset.view===currentView && (currentView==='today'||currentView==='all')) ||
+     (currentView==='area' && btn.dataset.area===currentArea);
+   btn.classList.toggle('active',active);
+ });
+}
+function makeVideoCard(v){
+ const id=String(videos.indexOf(v));
+ const card=document.createElement('article');
+ card.className='video'+(watched[id]?' done':'');
+ const check=document.createElement('input');
+ check.type='checkbox';check.className='check';check.checked=!!watched[id];
+ check.setAttribute('aria-label','시청 완료 체크');
+ check.onchange=()=>{watched[id]=check.checked;localStorage.setItem(STORE,JSON.stringify(watched));render();};
+ const body=document.createElement('div');body.style.flex='1';
+ const title=document.createElement('p');title.className='vtitle';title.textContent=v.title;
+ const meta=document.createElement('div');meta.className='meta';meta.textContent=`${v.area} · 유치원 대상`;
+ const a=document.createElement('a');a.className='watch';a.href=v.url;a.target='_blank';a.rel='noopener';a.textContent='▶ 영상 보기';
+ body.append(title,meta,a);card.append(check,body);return card;
+}
+function render(){
+ const daily=getDailyVideo();
+ const box=document.getElementById('dailyArea');
+ const date=new Date();
+ const dateText=date.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+ const [todayName,todayIcon,todayDesc]=daily.area;
+ box.innerHTML=`<strong>🌞 오늘의 안전교육 · ${todayIcon} ${todayName}</strong><span>${dateText} · ${daily.day+1}일차<br>${todayDesc}<br>오늘은 영상 한 편만 함께 봐요. 내일은 다음 안전교육 영역의 영상으로 바뀝니다.</span>`;
+ content.innerHTML='';
+ if(currentView==='today'){
+   const h=document.createElement('h2');h.className='area-heading';h.textContent='오늘의 영상 1편';content.appendChild(h);
+   content.appendChild(makeVideoCard(daily.video));
+   const tip=document.createElement('p');tip.className='area-desc';tip.textContent='오늘은 이 영상 한 편만 시청해요. 내일은 다음 안전교육 영역의 영상 한 편이 자동으로 나옵니다.';content.appendChild(tip);
+ }else{
+   let list=[];
+   let heading='';
+   if(currentView==='all'){list=videos;heading='전체 안전교육 영상';}
+   else{list=videos.filter(v=>v.area===currentArea);heading=currentArea;}
+   const h=document.createElement('h2');h.className='area-heading';h.textContent=heading;content.appendChild(h);
+   const desc=document.createElement('p');desc.className='area-desc';
+   desc.textContent=currentView==='all'?'전체 영역의 영상을 찾아볼 수 있어요. 오늘의 영상은 ‘오늘의 영역’에서 한 편씩 확인해 주세요.':`${currentArea} 영역의 영상 ${list.length}편입니다. 오늘의 기본 학습은 ‘오늘의 영역’에서 하루 한 편씩 진행됩니다.`;
+   content.appendChild(desc);
+   const grid=document.createElement('div');grid.className='cards';
+   list.forEach(v=>grid.appendChild(makeVideoCard(v)));content.appendChild(grid);
+ }
+ setActiveTab();updateProgress();
+}
+document.querySelectorAll('.tab').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  if(btn.dataset.view){currentView=btn.dataset.view;currentArea='';}
+  else if(btn.dataset.area){currentView='area';currentArea=btn.dataset.area;}
+  render();
+ });
+});
+render();
+ };
+ const body=document.createElement('div');
+ body.style.flex='1';
+ const title=document.createElement('p');
+ title.className='vtitle';
+ title.textContent=v.title;
+ const meta=document.createElement('div');
+ meta.className='meta';
+ meta.textContent=`${name} · 유치원 대상`;
+ const a=document.createElement('a');
+ a.className='watch';
+ a.href=v.url;
+ a.target='_blank';
+ a.rel='noopener';
+ a.textContent='▶ 오늘의 영상 보기';
+ body.append(title,meta,a);
+ card.append(check,body);
+ content.appendChild(card);
+ const tip=document.createElement('p');
+ tip.className='area-desc';
+ tip.textContent='영상을 시청한 뒤 왼쪽 체크 칸을 눌러 오늘의 학습을 기록해 주세요. 영상은 하루에 한 편씩 제공됩니다.';
+ content.appendChild(tip);
+ updateProgress();
+}
+render();
 </script></body></html>
