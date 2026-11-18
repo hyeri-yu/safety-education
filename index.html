@@ -123,15 +123,6 @@ const videos=[{"area":"생활안전","title":"안전하게 놀이해요(영유�
  ["직업안전","🦺","일터와 직업 활동에서의 안전"]
 ];
 
-// 데이터 점검 함수: 브라우저 개발자 콘솔에서 auditSafetyVideos() 실행
-function auditSafetyVideos(){
- const counts=Object.fromEntries(areas.map(([name])=>[name,videos.filter(v=>v.area===name).length]));
- const issues=videos.map((v,i)=>({index:i+1,video:v})).filter(({video:v})=>
-  !v.title || !v.url || /https?:\\/\\/|제목:|초등저|초등고|중\\/고|출처:|출처 :/.test(v.title) ||
-  !/^https?:\\/\\/(www\\.)?(youtube\\.com|youtu\\.be)\\//.test(v.url));
- console.table(counts); console.log('총 영상',videos.length,'점검 필요',issues); return {counts,total:videos.length,issues};
-}
-
 const STORE='rasSafetyWatched2026';
 const ROTATION_START='2026-11-16';
 function dayNumber(){
